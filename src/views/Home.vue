@@ -1,19 +1,23 @@
 <template>
   <div class="home">
-    <h1>New Student</h1>
-    <div>
-      Name:
-      <input type="text" v-model="newStudent.name" />
-      Resume:
-      <input type="text" v-model="newStudent.resume" />
-      Twitter:
-      <input type="text" v-model="newStudent.twitter" />
-      <button v-on:click="createStudent()">Create Student</button>
-    </div>
+    <button v-on:click="showStudent(student)">Find Student</button>
 
     <h1>All Students</h1>
     <div v-for="student in students" v-bind:key="student.id">
       <h2>{{ student.name }}</h2>
+    </div>
+    <dialog id="student-details">
+      <form method="dialog">
+        <h1>Student info</h1>
+        <p>Name: {{ currentStudent.name }}</p>
+        <p>Resume: {{ currentStudent.resume }}</p>
+        <p>Twitter: {{ currentStudent.twitter }}</p>
+        <button>Close</button>
+      </form>
+    </dialog>
+    <div>
+      <h3>Search</h3>
+      <p></p>
     </div>
   </div>
 </template>
@@ -26,7 +30,7 @@ export default {
   data: function () {
     return {
       students: [],
-      newStudent: {},
+      currentStudent: {},
     };
   },
   created: function () {
@@ -39,22 +43,9 @@ export default {
         this.students = response.data;
       });
     },
-    createStudent: function () {
-      var params = {
-        name: this.newStudent.name,
-        resume: this.newStudent.resume,
-        twitter: this.newStudent.twitter,
-      };
-      axios
-        .post("/students", params)
-        .then((response) => {
-          console.log("students create", response);
-          this.students.push(response.data);
-          this.newStudent = {};
-        })
-        .catch((error) => {
-          console.log("students create error", error.response);
-        });
+    showStudent: function (student) {
+      this.currentStudent = student;
+      document.querySelector("#student-details").showModal();
     },
   },
 };
