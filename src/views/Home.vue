@@ -1,28 +1,39 @@
 <template>
   <div class="home">
-    <button v-on:click="showStudent(student)">Find Student</button>
-
     <h1>All Students</h1>
     <div v-for="student in students" v-bind:key="student.id">
-      <h2>{{ student.name }}</h2>
+      <p>First name: {{ student.first_name }}</p>
+      <p>Last name: {{ student.last_name }}</p>
+      <p>Email: {{ student.email }}</p>
+      <div class="info">
+        <button v-on:click="showStudent(student)">More info</button>
+      </div>
     </div>
+
     <dialog id="student-details">
       <form method="dialog">
         <h1>Student info</h1>
-        <p>Name: {{ currentStudent.name }}</p>
-        <p>Resume: {{ currentStudent.resume }}</p>
-        <p>Twitter: {{ currentStudent.twitter }}</p>
+        <p>Phone Number: {{ currentStudent.phone_number }}</p>
+        <p>Bio: {{ currentStudent.bio }}</p>
+        <p>LinkedIn: {{ currentStudent.linkedin }}</p>
+        <p>Twitter Handle: {{ currentStudent.twitter_handle }}</p>
+        <p>Website: {{ currentStudent.website }}</p>
+        <p>Resume URL: {{ currentStudent.resume_url }}</p>
+        <p>Github: {{ currentStudent.github }}</p>
+        <p>Photo: {{ currentStudent.photo }}</p>
         <button>Close</button>
       </form>
     </dialog>
-    <div>
-      <h3>Search</h3>
-      <p></p>
-    </div>
   </div>
 </template>
 
-<style></style>
+<style>
+.info {
+  margin: 0;
+  position: relative;
+  left: 45%;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -33,6 +44,7 @@ export default {
       currentStudent: {},
     };
   },
+
   created: function () {
     this.indexStudents();
   },
