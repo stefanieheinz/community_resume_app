@@ -5,8 +5,11 @@
       <p>First name: {{ student.first_name }}</p>
       <p>Last name: {{ student.last_name }}</p>
       <p>Email: {{ student.email }}</p>
-      <button v-on:click="showStudent(student)">More info</button>
+      <div class="info">
+        <button v-on:click="showStudent(student)">More info</button>
+      </div>
     </div>
+
     <dialog id="student-details">
       <form method="dialog">
         <h1>Student info</h1>
@@ -24,7 +27,13 @@
   </div>
 </template>
 
-<style></style>
+<style>
+.info {
+  margin: 0;
+  position: relative;
+  left: 45%;
+}
+</style>
 
 <script>
 import axios from "axios";

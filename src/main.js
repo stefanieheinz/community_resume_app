@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://guarded-ridge-08594.herokuapp.com" : "/";
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "https://guarded-ridge-08594.herokuapp.com" : "/";
 
 Vue.config.productionTip = false;
 
